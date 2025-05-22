@@ -1,18 +1,22 @@
-from telegram import Update, ReplyKeyboardMarkup, WebAppInfo
-from telegram.ext import Application, CommandHandler
 import os
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram.ext import Application, CommandHandler
 
-API_TOKEN = os.environ['TELEGRAM_TOKEN']       # читаем из env
-WEBAPP_URL = os.environ['WEBAPP_URL']         # читаем из env
+API_TOKEN = os.environ['TELEGRAM_TOKEN']     # ваш токен
+WEBAPP_URL = os.environ['WEBAPP_URL']       # URL вашего Bubble-chart
 
 async def start(update: Update, context):
-    keyboard = [[{
-        "text": "Показать график 💠",
-        "web_app": WebAppInfo(url=WEBAPP_URL)
-    }]]
+    # Создаём кнопку, которая откроет Web App
+    button = InlineKeyboardButton(
+        text="Показать график 💠",
+        web_app=WebAppInfo(url=WEBAPP_URL)
+    )
+    keyboard = InlineKeyboardMarkup([[button]])
+    
+    # Отправляем сообщение с inline-клавиатурой
     await update.message.reply_text(
         "Нажми кнопку, чтобы посмотреть пузырьковый график:",
-        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+        reply_markup=keyboard
     )
 
 if __name__ == "__main__":
