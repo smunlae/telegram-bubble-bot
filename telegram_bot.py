@@ -8,14 +8,14 @@ WEBAPP_URL = os.environ['WEBAPP_URL']       # URL вашего Bubble-chart
 async def start(update: Update, context):
     # Создаём кнопку, которая откроет Web App
     button = InlineKeyboardButton(
-        text="Показать график 💠",
+        text="Gift Bubbles 💠",
         web_app=WebAppInfo(url=WEBAPP_URL)
     )
     keyboard = InlineKeyboardMarkup([[button]])
     
     # Отправляем сообщение с inline-клавиатурой
     await update.message.reply_text(
-        "Нажми кнопку, чтобы посмотреть пузырьковый график:",
+        "Нажми кнопку, чтобы посмотреть изменения цен telegram gifts:",
         reply_markup=keyboard
     )
 
