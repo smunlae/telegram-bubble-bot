@@ -15,7 +15,9 @@ async def start(update: Update, context):
     
     # Отправляем сообщение с inline-клавиатурой
     await update.message.reply_text(
-        "Нажми кнопку, чтобы посмотреть изменения цен telegram gifts:",
+        "Обновления бота - https://t.me/giftsBubbles (Подпишись)
+        
+        Нажми кнопку, чтобы посмотреть изменения цен telegram gifts:",
         reply_markup=keyboard
     )
 
