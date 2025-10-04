@@ -19,8 +19,14 @@ async def start(update: Update, context):
         reply_markup=keyboard
     )
 
+async def _remove_webhook(app: Application) -> None:
+    """Ensure polling can be used by removing an active webhook."""
+
+    await app.bot.delete_webhook(drop_pending_updates=True)
+
+
 if __name__ == "__main__":
-    app = Application.builder().token(API_TOKEN).build()
+    app = Application.builder().token(API_TOKEN).post_init(_remove_webhook).build()
     app.add_handler(CommandHandler("start", start))
     print("Bot is running...")
     app.run_polling()
